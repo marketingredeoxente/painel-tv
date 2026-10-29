@@ -11,7 +11,7 @@ var CONFIG = {
 
   // Imagens de fundo (pasta app/img), alternando em loop.
   // Use JPG 1920x1080 de até ~400 KB para não pesar na TV.
-  fundos: ['img/fundo1.jpg', 'img/fundo2.jpg'],
+  fundos: ['fundo1.jpg', 'fundo2.jpg'],
   intervaloFundo: 12,   // segundos em cada imagem
 
   // Previsão do tempo (Open-Meteo, gratuito, sem cadastro). Atualiza a cada 30 min.

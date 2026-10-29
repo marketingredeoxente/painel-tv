@@ -1,0 +1,13 @@
+{
+  "name": "painel-tv-cleber",
+  "version": "1.0.0",
+  "description": "Painel leve para Samsung Tizen: só os apps e canais de TV aberta que você usa. Módulo TizenBrew.",
+  "packageType": "app",
+  "appName": "Meu Painel",
+  "appPath": "app/index.html",
+  "serviceFile": "service/service.js",
+  "keys": ["ColorF0Red", "ColorF1Green", "ColorF2Yellow", "ColorF3Blue"],
+  "files": ["app/", "service/"],
+  "keywords": ["tizenbrew", "tizen", "samsung", "launcher"],
+  "license": "MIT"
+}

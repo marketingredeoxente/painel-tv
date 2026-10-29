@@ -1,0 +1,117 @@
+/* Tela fixa 1920x1080 (o Tizen renderiza web apps nessa resolução).
+   Tema preto + verde neon sobre fundo de imagens em loop.
+   Informações em cima, ícones embaixo, centro livre para as imagens.
+   Sem blur (backdrop-filter): pesado demais para o processador da TV. */
+:root {
+  --neon: #39ff14;
+  --neon-suave: #2bd10f;
+  --vidro: rgba(0, 0, 0, 0.62);
+  --vidro-foco: rgba(6, 22, 4, 0.82);
+  --borda: rgba(57, 255, 20, 0.22);
+  --texto: #f2fff0;
+  --texto-2: #b7c9b3;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 1920px; height: 1080px; overflow: hidden;
+  background: #000;
+  color: var(--texto);
+  font-family: "SamsungOne", "Samsung Sans", Roboto, Arial, sans-serif;
+}
+
+/* ---------- Fundo em loop ---------- */
+#fundos, .fundo, #sombra-topo, #sombra-base { position: absolute; left: 0; width: 1920px; }
+#fundos { top: 0; height: 1080px; }
+.fundo {
+  top: 0; height: 1080px;
+  background-size: cover; background-position: center;
+  opacity: 0;
+  transition: opacity 1600ms ease-in-out;
+  will-change: opacity;
+}
+.fundo.ativo { opacity: 1; }
+
+/* Degradês só nas bordas para o texto ler bem sem esconder as imagens */
+#sombra-topo { top: 0; height: 230px; background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0)); }
+#sombra-base { bottom: 0; height: 290px; background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0)); }
+
+#tela {
+  position: relative; z-index: 2;
+  width: 1920px; height: 1080px;
+  padding: 30px 60px 24px;
+  display: flex; flex-direction: column;
+}
+
+/* ---------- Topo: saudação | tempo | hora ---------- */
+header { display: flex; align-items: center; justify-content: space-between; }
+#saudacao { font-size: 38px; font-weight: 700; text-shadow: 0 2px 8px #000; }
+#data { font-size: 22px; color: var(--texto-2); margin-top: 2px; text-shadow: 0 2px 6px #000; }
+#hora {
+  font-size: 72px; font-weight: 300; line-height: 1; color: var(--neon);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 16px rgba(57, 255, 20, 0.5), 0 2px 6px #000;
+}
+
+#tempo {
+  display: flex; align-items: center; gap: 20px;
+  padding: 10px 22px;
+  border: 2px solid var(--borda); border-radius: 18px;
+  background: var(--vidro);
+}
+#tempo.oculto { visibility: hidden; }
+#tempo .agora { display: flex; align-items: center; gap: 12px; }
+#tempo .icone svg { width: 56px; height: 56px; display: block; }
+#tempo .temp { font-size: 50px; font-weight: 700; line-height: 1; color: var(--neon); }
+#tempo .info { font-size: 17px; color: var(--texto-2); line-height: 1.35; }
+#tempo .info b { color: var(--texto); font-size: 20px; font-weight: 600; display: block; }
+#tempo .dias { display: flex; gap: 14px; padding-left: 20px; border-left: 2px solid var(--borda); }
+#tempo .dia { text-align: center; font-size: 16px; color: var(--texto-2); width: 64px; }
+#tempo .dia svg { width: 30px; height: 30px; display: block; margin: 2px auto; }
+#tempo .dia .mx { color: var(--texto); font-weight: 600; font-size: 17px; }
+
+/* Centro livre: as imagens aparecem aqui */
+#espaco { flex: 1; }
+
+/* ---------- Base: barra de ícones ---------- */
+#barra { display: flex; align-items: flex-end; justify-content: center; gap: 30px; }
+.grupo h2 {
+  font-size: 17px; font-weight: 700; color: var(--neon);
+  text-transform: uppercase; letter-spacing: 3px; margin: 0 0 10px 4px;
+  text-shadow: 0 2px 6px #000;
+}
+.divisor { width: 2px; height: 110px; background: var(--borda); margin-bottom: 8px; }
+.linha { display: flex; gap: 16px; }
+
+.card {
+  position: relative;
+  border-radius: 18px;
+  background: var(--vidro);
+  border: 2px solid var(--borda);
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  transition: transform 120ms ease-out, border-color 120ms, background-color 120ms;
+  overflow: hidden;
+}
+.card.foco {
+  transform: translateY(-8px) scale(1.08);
+  border: 3px solid var(--neon);
+  background: var(--vidro-foco);
+  box-shadow: 0 0 24px rgba(57, 255, 20, 0.55);
+}
+.card.foco .nome { color: var(--neon); }
+.card.abrindo { opacity: 0.55; }
+
+/* Apps */
+#apps .card { width: 210px; height: 120px; }
+#apps .card img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 4px; }
+#apps .card .nome { font-size: 28px; font-weight: 700; }
+#apps .card img + .nome { font-size: 20px; font-weight: 600; }
+
+/* Canais */
+#canais .card { width: 150px; height: 120px; }
+#canais .numero { font-size: 48px; font-weight: 800; line-height: 1; color: var(--neon); }
+#canais .nome { font-size: 20px; font-weight: 600; margin-top: 4px; }
+
+footer { height: 26px; margin-top: 8px; text-align: center; font-size: 19px; }
+#status { color: var(--neon); text-shadow: 0 2px 6px #000; }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Meu Painel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fundo: as imagens se alternam em loop (crossfade) -->
+  <div id="fundos"></div>
+  <div id="sombra-topo"></div>
+  <div id="sombra-base"></div>
+
+  <div id="tela">
+    <header>
+      <div class="saudacao-box">
+        <div id="saudacao">Olá</div>
+        <div id="data"></div>
+      </div>
+      <div id="tempo" class="oculto"></div>
+      <div id="hora">--:--</div>
+    </header>
+
+    <div id="espaco"></div>
+
+    <nav id="barra">
+      <div class="grupo">
+        <h2>Apps</h2>
+        <div class="linha" id="apps"></div>
+      </div>
+      <div class="divisor"></div>
+      <div class="grupo">
+        <h2>TV aberta</h2>
+        <div class="linha" id="canais"></div>
+      </div>
+    </nav>
+
+    <footer><span id="status"></span></footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
